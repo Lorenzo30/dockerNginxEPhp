@@ -1,0 +1,12 @@
+FROM php:8.2-fpm
+
+RUN apt-get update
+
+RUN mkdir -p /entrypoints
+COPY ./entrypoint.sh /entrypoints/entrypoint.sh
+
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+
+RUN chmod +x /entrypoints/entrypoint.sh
+ENTRYPOINT ["/entrypoints/entrypoint.sh"]
+

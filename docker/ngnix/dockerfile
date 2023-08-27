@@ -1,0 +1,20 @@
+FROM nginx:latest
+
+RUN mkdir -p /entrypoints
+COPY ./entrypoint.sh /entrypoints/entrypoint.sh
+
+
+RUN mkdir /etc/nginx/certs;
+
+RUN openssl req -x509 -nodes -days 365 \
+    -subj  "/C=CA/ST=QC/O=Company Inc/CN=example.com" \
+     -newkey rsa:2048 -keyout /etc/nginx/certs/nginx-selfsigned.key \
+     -out /etc/nginx/certs/nginx-selfsigned.crt;
+
+RUN chmod +x /entrypoints/entrypoint.sh
+ENTRYPOINT ["/entrypoints/entrypoint.sh"]
+   
+   
+
+
+
