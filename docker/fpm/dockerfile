@@ -6,6 +6,7 @@ RUN mkdir -p /entrypoints
 COPY ./entrypoint.sh /entrypoints/entrypoint.sh
 
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+RUN docker-php-ext-install mysqli pdo pdo_mysql && docker-php-ext-enable pdo_mysql
 
 RUN chmod +x /entrypoints/entrypoint.sh
 ENTRYPOINT ["/entrypoints/entrypoint.sh"]

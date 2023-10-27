@@ -2,6 +2,11 @@
 mkdir /projeto
 
 composer install
-php-fpm --nodaemonize
+
+cd /projeto/example-app
+php artisan migrate:fresh
+
+php-fpm 
+
 
 
